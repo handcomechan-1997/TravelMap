@@ -1,0 +1,38 @@
+[
+    {
+        "location": "南京",
+        "altNames": ["南京", "Nanjing"],
+        "description": "这是我在 南京 拍摄的照片。",
+        "urls": [
+            "images/nanjing/photo1.jpg",
+            "images/nanjing/photo2.jpg"
+        ]
+    },
+    {
+        "location": "上海",
+        "altNames": ["上海", "Shanghai"],
+        "description": "这是我在 上海 拍摄的照片。",
+        "urls": [
+            "images/shanghai/photo1.jpg",
+            "images/shanghai/photo2.jpg"
+        ]
+    },
+    {
+        "location": "苏州",
+        "altNames": ["苏州", "Suzhou"],
+        "description": "这是我在 苏州 拍摄的照片。",
+        "urls": [
+            "images/suzhou/photo1.jpg",
+            "images/suzhou/photo2.jpg"
+        ]
+    },
+    {
+        "location": "香港",
+        "altNames": ["香港", "Hong Kong"],
+        "description": "这是我在 香港 拍摄的照片。",
+        "urls": [
+            "images/hongkong/photo1.jpg",
+            "images/hongkong/photo2.jpg"
+        ]
+    }
+]

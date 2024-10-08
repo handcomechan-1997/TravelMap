@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>我的旅行地图</title>
+    <!-- 使用 Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap">
+    <!-- 引入 ECharts 主库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <!-- 引入中国地图数据 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <!-- 引入 Font Awesome 图标库（用于标记点图标） -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- 引入 Lightbox2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <!-- 引入自定义 CSS -->
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="搜索城市..." aria-label="搜索城市">
+        <button id="search-button">搜索</button>
+    </div>
+    <div id="map" role="img" aria-label="中国地图，点击查看城市照片"></div>
+    <div class="photo-gallery" id="photo-gallery" role="region" aria-label="照片展示区"></div>
+    <div class="info-panel" id="info-panel" role="region" aria-label="信息面板"></div>
+    <div class="tooltip-photo" id="tooltip-photo" role="tooltip">
+        <img id="tooltip-img" src="" alt="照片预览">
+    </div>
+
+    <!-- 引入 Lightbox2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <!-- 引入自定义 JS -->
+    <script src="./main.js"></script>
+</body>
+</html>
