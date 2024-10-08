@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试地图</title>
+    <!-- 引入 ECharts 主库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <!-- 引入中国地图数据 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+</head>
+<body>
+    <div id="map" style="width: 600px; height: 400px;"></div>
+    <script>
+        var myMap = echarts.init(document.getElementById('map'));
+
+        var option = {
+            geo: {
+                map: 'china'
+            }
+        };
+
+        myMap.setOption(option);
+    </script>
+</body>
+</html>
