@@ -154,7 +154,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         }
                     }
                 }
-                // 如有旅行路线数据，可以添加到 series 中
             ]
         };
         myMap.setOption(option);
