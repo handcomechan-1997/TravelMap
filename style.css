@@ -1,18 +1,36 @@
-/* 全局样式 */
-body {
+/* 重置样式 */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 使 body 和 html 充满整个窗口 */
+html, body {
+    width: 100%;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
     background-color: #f9fafb;
     color: #2c3e50;
+    overflow: hidden; /* 防止出现滚动条 */
+}
+
+/* 地图容器全屏显示 */
+#map {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 /* 搜索容器 */
 #search-container {
-    max-width: 1000px;
-    margin: 20px auto;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
-    justify-content: center;
     gap: 10px;
+    z-index: 1000;
 }
 
 #search-input {
@@ -20,7 +38,6 @@ body {
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
-    flex: 1;
     transition: border-color 0.3s ease;
 }
 
@@ -45,27 +62,21 @@ body {
     transform: translateY(-2px);
 }
 
-/* 地图容器 */
-#map {
-    width: 100%;
-    height: 600px;
-    margin: 20px auto;
-    max-width: 1000px;
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border: none;
-    overflow: hidden;
-}
-
 /* 照片展示区 */
 .photo-gallery {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 40%;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
+    z-index: 1000;
 }
 
 .photo-gallery a {
@@ -73,10 +84,10 @@ body {
 }
 
 .photo-gallery a img {
-    width: 300px; /* 固定宽度 */
-    height: 200px; /* 固定高度 */
+    width: 300px;
+    height: 200px;
     border-radius: 10px;
-    object-fit: cover; /* 确保照片按比例填充容器 */
+    object-fit: cover;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
@@ -85,6 +96,28 @@ body {
 .photo-gallery a img:hover {
     transform: scale(1.05);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* 信息面板 */
+.info-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 40%;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    z-index: 1000;
+}
+
+.info-panel h2 {
+    margin-top: 0;
+    color: #3498db;
+}
+
+.info-panel p {
+    line-height: 1.6;
 }
 
 /* 工具提示照片 */
@@ -107,56 +140,17 @@ body {
     object-fit: cover;
 }
 
-/* 信息面板 */
-.info-panel {
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-}
-
-.info-panel h2 {
-    margin-top: 0;
-    color: #3498db;
-}
-
-.info-panel p {
-    line-height: 1.6;
-}
-
 /* 响应式设计 */
 @media (max-width: 768px) {
-    #map {
-        height: 400px;
-    }
-    .photo-gallery {
-        padding: 10px;
-    }
     .photo-gallery a img {
-        width: calc(50% - 20px); /* 两列布局 */
+        width: calc(50% - 20px);
         height: auto;
-    }
-    #search-container {
-        flex-direction: column;
-        gap: 5px;
-    }
-    #search-button {
-        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    #map {
-        height: 300px;
-    }
     .photo-gallery a img {
-        width: 100%; /* 单列布局 */
+        width: 100%;
         height: auto;
-    }
-    .info-panel {
-        padding: 10px;
     }
 }

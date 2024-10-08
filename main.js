@@ -4,20 +4,25 @@ document.addEventListener("DOMContentLoaded", function() {
         return;
     }
 
-    // 获取照片数据
-    fetch('./data/photos.json')
-        .then(response => response.json())
-        .then(photos => {
-            // 初始化地图和事件处理程序
-            initMap(photos);
-        })
-        .catch(error => {
-            console.error('获取照片数据失败:', error);
-        });
+    // 全局变量
+    var photosData;
+    var routesData;
 
-    // 定义 initMap 函数
-    function initMap(photos) {
-        // 初始化地图
+    // 获取照片数据和路线数据
+    Promise.all([
+        fetch('./data/photos.json').then(response => response.json()),
+        fetch('./data/routes.json').then(response => response.json())
+    ])
+    .then(([photos, routes]) => {
+        photosData = photos;
+        routesData = routes;
+        initMap(photosData, routesData);
+    })
+    .catch(error => {
+        console.error('获取数据失败:', error);
+    });
+
+    function initMap(photos, routes) {
         var myMap = echarts.init(document.getElementById('map'));
 
         // 城市坐标映射
@@ -44,118 +49,128 @@ document.addEventListener("DOMContentLoaded", function() {
             // 如有更多城市，添加到此处
         ];
 
-        // 动态生成地图数据
-        var mapData = allCities.map(city => ({
-            name: city.name,
-            value: Math.random() * 100, // 您可以根据需要设置实际的值
-            hasPhoto: city.hasPhoto
-        }));
-
         // 动态生成标记点数据
         var scatterData = allCities.map(function(city) {
             var coord = geoCoordMap[city.name];
             if (coord) {
                 return {
                     name: city.name,
-                    value: coord.concat(1),
-                    symbol: city.hasPhoto ? 'circle' : 'emptyCircle',
-                    symbolSize: city.hasPhoto ? 20 : 12,
-                    label: { show: false },
-                    itemStyle: { color: city.hasPhoto ? '#e74c3c' : '#95a5a6' },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            formatter: '{b}',
-                            color: '#fff',
-                            fontSize: 14,
-                            fontWeight: 'bold'
-                        }
+                    value: coord.concat(city.hasPhoto ? 50 : 30),
+                    symbol: 'pin',
+                    symbolSize: city.hasPhoto ? 50 : 30,
+                    label: {
+                        show: true,
+                        formatter: '{b}',
+                        position: 'top',
+                        color: '#fff',
+                        fontSize: 12,
+                        backgroundColor: 'rgba(0,0,0,0.5)',
+                        padding: [2, 4],
+                        borderRadius: 3
+                    },
+                    itemStyle: {
+                        color: city.hasPhoto ? '#FF6B6B' : '#1F78B4',
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
                     }
                 };
             }
         }).filter(item => item !== undefined);
 
-        // 设置地图选项
+        // 生成飞线数据
+        var convertData = function(data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var fromCoord = geoCoordMap[data[i].from];
+                var toCoord = geoCoordMap[data[i].to];
+                if (fromCoord && toCoord) {
+                    res.push({
+                        fromName: data[i].from,
+                        toName: data[i].to,
+                        coords: [fromCoord, toCoord],
+                        value: data[i].value || 1
+                    });
+                }
+            }
+            return res;
+        };
+
+        var flightLines = convertData(routes);
+
         var option = {
+            backgroundColor: '#2E3B4E',
             tooltip: {
                 trigger: 'item',
                 formatter: function(params) {
-                    return params.name;
+                    if (params.seriesType === 'lines') {
+                        return params.data.fromName + ' → ' + params.data.toName;
+                    } else if (params.seriesType === 'scatter') {
+                        return params.name;
+                    } else {
+                        return params.name;
+                    }
                 },
                 backgroundColor: 'rgba(50, 50, 50, 0.7)',
                 textStyle: {
                     color: '#fff'
                 }
             },
-            visualMap: {
-                show: false,
-                min: 0,
-                max: 100,
-                inRange: {
-                    color: ['#e0f7fa', '#006064']
-                }
-            },
             geo: {
                 map: 'china',
                 roam: true,
+                zoom: 1.2,
                 label: {
-                    emphasis: {
-                        show: false
-                    }
+                    show: false,
+                    color: '#fff'
                 },
                 itemStyle: {
                     normal: {
-                        areaColor: '#e0f7fa',
-                        borderColor: '#b0bec5',
-                        borderWidth: 1
+                        areaColor: '#3A3A3A',
+                        borderColor: '#FFFFFF',
+                        borderWidth: 1,
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)',
+                        shadowOffsetX: 0,
+                        shadowOffsetY: 5
                     },
                     emphasis: {
-                        areaColor: '#80deea'
+                        areaColor: '#FF6B6B'
                     }
                 }
             },
             series: [
                 {
-                    name: '中国',
-                    type: 'map',
-                    geoIndex: 0,
-                    roam: false,
-                    label: {
+                    name: '飞线',
+                    type: 'lines',
+                    coordinateSystem: 'geo',
+                    zlevel: 2,
+                    large: true,
+                    effect: {
                         show: true,
-                        color: '#37474f',
-                        fontSize: 12,
-                        fontWeight: 'bold'
+                        constantSpeed: 30,
+                        symbol: 'arrow',
+                        symbolSize: 6,
+                        trailLength: 0
                     },
-                    data: mapData
+                    lineStyle: {
+                        normal: {
+                            color: '#FF6B6B',
+                            width: 1,
+                            opacity: 0.6,
+                            curveness: 0.2
+                        }
+                    },
+                    data: flightLines
                 },
                 {
                     name: '标记点',
                     type: 'scatter',
                     coordinateSystem: 'geo',
-                    data: scatterData,
-                    symbolSize: function(val) {
-                        return val[2];
-                    },
-                    label: {
-                        show: false
-                    },
-                    itemStyle: {
-                        color: function(params) {
-                            return params.data.itemStyle.color;
-                        }
-                    },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            formatter: '{b}',
-                            color: '#fff',
-                            fontSize: 14,
-                            fontWeight: 'bold'
-                        }
-                    }
+                    data: scatterData
                 }
             ]
         };
+
         myMap.setOption(option);
 
         // 窗口大小变化时，调整地图大小

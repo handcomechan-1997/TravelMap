@@ -10,18 +10,21 @@
     <!-- 引入中国地图数据 -->
     <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
     <!-- 引入 Font Awesome 图标库 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-OePhoNxku4Qy+1Ge8XJrBdoasjKZsnxX4lnNUzIDw6YSAuT2o1nZupIsHzlVf2HnI+EGAdouVjg6ZqgvpJ36hQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- 引入 Lightbox2 CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" integrity="sha512-E+VEmSULiSZsI7UOH4MpmULHuaj5WSW3dbopryL6Vi3+zuu14LBvXq2NNQ0E/SF8C2IJC1XoQjP1UFyx0r43Qw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- 引入自定义 CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 将搜索容器放在地图之上 -->
     <div id="search-container">
         <input type="text" id="search-input" placeholder="搜索城市..." aria-label="搜索城市">
         <button id="search-button">搜索</button>
     </div>
+    <!-- 将地图容器放在 body 内的第一个位置 -->
     <div id="map" role="img" aria-label="中国地图，点击查看城市照片"></div>
+    <!-- 照片展示区和信息面板 -->
     <div class="photo-gallery" id="photo-gallery" role="region" aria-label="照片展示区"></div>
     <div class="info-panel" id="info-panel" role="region" aria-label="信息面板"></div>
     <div class="tooltip-photo" id="tooltip-photo" role="tooltip">
@@ -29,9 +32,9 @@
     </div>
 
     <!-- 引入 jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YeM...H6tdE" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YeMlh14C22LPVxITpqC+7SVKWDucotJ5qBfjfnBEKr5SbRUxB8Gw0WADZo6l17VP8zkI9DeB6PtVXH6UZhw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- 引入 Lightbox2 JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js" integrity="sha512-...=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js" integrity="sha512-qfbXVRD07+nOYp7Kq+54LXG29d7l/jW1Q+9lSdbIs/9sUwjnCjBdk0yV8tXKpjdpHZZV7zRkQYgSIzCytKBSwQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- 引入自定义 JS -->
     <script src="main.js"></script>
 </body>
