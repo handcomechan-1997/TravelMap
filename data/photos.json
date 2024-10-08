@@ -5,7 +5,8 @@
         "description": "这是我在 南京 拍摄的照片。",
         "urls": [
             "images/nanjing/photo1.jpg",
-            "images/nanjing/photo2.jpg"
+            "images/nanjing/photo2.jpg",
+            "images/nanjing/photo3.jpg"
         ]
     },
     {
@@ -14,7 +15,8 @@
         "description": "这是我在 上海 拍摄的照片。",
         "urls": [
             "images/shanghai/photo1.jpg",
-            "images/shanghai/photo2.jpg"
+            "images/shanghai/photo2.jpg",
+            "images/shanghai/photo3.jpg"
         ]
     },
     {
@@ -22,8 +24,7 @@
         "altNames": ["苏州", "Suzhou"],
         "description": "这是我在 苏州 拍摄的照片。",
         "urls": [
-            "images/suzhou/photo1.jpg",
-            "images/suzhou/photo2.jpg"
+            "images/suzhou/photo1.jpg"        
         ]
     },
     {
@@ -32,7 +33,9 @@
         "description": "这是我在 香港 拍摄的照片。",
         "urls": [
             "images/hongkong/photo1.jpg",
-            "images/hongkong/photo2.jpg"
+            "images/hongkong/photo2.jpg",
+            "images/hongkong/photo3.jpg",
+            "images/hongkong/photo4.jpg"
         ]
     }
 ]
