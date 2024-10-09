@@ -66,12 +66,12 @@ your-project/
 1. 克隆或下载本项目的源码到本地。
 
    ```bash
-   git clone https://github.com/your-username/your-project.git
+   git clone git@github.com:handcomechan-1997/TravelMap.git
    ```
 2. 进入项目目录。
 
    ```bash
-   cd your-project
+   cd TravelMap
    ```
 ### 启动本地服务器
 由于浏览器的安全策略，需要通过本地服务器来运行项目。
@@ -167,7 +167,7 @@ images/
 ```json
 { "from": "起点城市", "to": "终点城市", "value": 1 }
 ```
-### 依赖库
+## 依赖库
 - ECharts
 - Lightbox2
 - jQuery
